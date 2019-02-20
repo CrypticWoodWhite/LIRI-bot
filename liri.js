@@ -3,6 +3,7 @@ var spotifynode = require("Node-Spotify-API");
 var axios = require("axios");
 var moment = require("moment");
 var dotenv =  require("DotEnv");
+var request = require("request");
 require("dotenv").config();
 
 // spotify keys
