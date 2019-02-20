@@ -16,7 +16,7 @@ function concert-this(searchterm) {
 
     $.ajax({
         url: queryURL,
-        method: "GET"
+        method: "GET"  
     })
         .then(function(response) {
             var results = response.root;
