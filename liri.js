@@ -25,7 +25,7 @@ function concert_this(concert) {
         })
 }
     
-
+// add for loop for artists
 function spotify_this_song(song) {
     if (song === undefined) {
         console.log("You did not give a song so we're using 'The Sign' by Ace of Base\n");
@@ -33,13 +33,12 @@ function spotify_this_song(song) {
     }
     spotify.search({type: "track", query: song})
         .then(function(response) {
-            // console.log(response);
-            // for (var i=0; i<response.length; i++) {
-            // console.log("\nArtists: " + response.artists); need a for loop for artists
-                console.log("Song: " + response.data.name);
-                console.log("Link to song preview: " + response.data.preview_url);
-                console.log("Album: " + response.data.album.name + "\n");
-            // }
+            for (var i=0; i<response.tracks.items.length; i++) {
+                // console.log("\nArtists: " + response.artists); need a for loop for artists
+                    console.log("Song: " + response.tracks.items[i].name);
+                    console.log("Link to song preview: " + response.tracks.items[i].preview_url);
+                    console.log("Album: " + response.tracks.items[i].album.name + "\n");
+                }
         })
         .catch(function(err) {
             console.log("\nERROR: " + err + "\n");
@@ -71,8 +70,12 @@ function movie_this(movie) {
 
 function do_what_it_says() {
     fs.readFile("./random.txt", "utf8")
-        .then(
-            // code here
+        .then(function(err, data) {
+        
+        var array = data.split(",");
+        go(array[0], array[1]);
+
+        } 
         )
         .catch(function(err) {
             console.log("\nERROR: " + err + "\n");
@@ -83,26 +86,31 @@ function do_what_it_says() {
 var functioncalled = process.argv[2];
 var searchterm = process.argv[3];
 
-if (functioncalled === "concert_this") {
-    concert_this(searchterm);
+function go(functioncalled, searchterm) {
+    if (functioncalled === "concert_this") {
+        concert_this(searchterm);
+    }
+    else if (functioncalled === "spotify_this_song") {
+        spotify_this_song(searchterm);
+    }
+    else if (functioncalled === "movie_this") {
+        movie_this(searchterm);
+    }
+    else if (functioncalled === "do_what_it_says") {
+        do_what_it_says(searchterm);
+    }
+    else {
+        console.log("\nDid you make a typo? Try again!");
+        console.log("These are the functions you can use:");
+        console.log("- concert_this");
+        console.log("- spotify_this_song");
+        console.log("- movie_this");
+        console.log("- do_what_it_says (this function has no input)\n");
+    }
 }
-else if (functioncalled === "spotify_this_song") {
-    spotify_this_song(searchterm);
-}
-else if (functioncalled === "movie_this") {
-    movie_this(searchterm);
-}
-else if (functioncalled === "do_what_it_says") {
-    do_what_it_says(searchterm);
-}
-else {
-    console.log("\nDid you make a typo? Try again!");
-    console.log("These are the functions you can use:");
-    console.log("- concert_this");
-    console.log("- spotify_this_song");
-    console.log("- movie_this");
-    console.log("- do_what_it_says (this function has no input)\n");
-}
+
+go(functioncalled, searchterm);
+
 
 
 
