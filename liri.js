@@ -9,12 +9,6 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var spotify = new Spotify(keys.spotify);
 
-// taking in user input
-var functioncalled = process.argv[2];
-var searchterm = process.argv[3];
-
-// instructions
-
 function concert_this(concert) {
     var queryURL = "https://rest.bandsintown.com/artists/" + concert + "/events?app_id=codingbootcamp";
     axios.get(queryURL)
@@ -41,7 +35,7 @@ function spotify_this_song(song) {
         .then(function(response) {
             // console.log(response);
             // for (var i=0; i<response.length; i++) {
-            // console.log("\nArtists: " + response.artists); need a for loop here
+            // console.log("\nArtists: " + response.artists); need a for loop for artists
                 console.log("Song: " + response.data.name);
                 console.log("Link to song preview: " + response.data.preview_url);
                 console.log("Album: " + response.data.album.name + "\n");
@@ -84,6 +78,10 @@ function do_what_it_says() {
             console.log("\nERROR: " + err + "\n");
         })
 }
+
+// taking in user input to determine which function to run
+var functioncalled = process.argv[2];
+var searchterm = process.argv[3];
 
 if (functioncalled === "concert_this") {
     concert_this(searchterm);
