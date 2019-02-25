@@ -20,3 +20,5 @@ This app uses a command line interface to search for music and movie information
     - ex. node liri.js do_what_it_says
     - Returns the results of the commands in the random.txt file
     - The random.txt file contains a function and a search term
+
+The results of each function are piped to a log.txt file.
