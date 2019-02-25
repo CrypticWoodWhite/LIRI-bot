@@ -85,6 +85,7 @@ function movie_this(movie) {
 
 // do what the random.txt file says
 function do_what_it_says() {
+    log("\r\nDo what the random.txt file says\r\n");
     fs.readFile("./random.txt", "utf8", function(err, data) {
         if (err) {
             log("ERROR: " + err);
