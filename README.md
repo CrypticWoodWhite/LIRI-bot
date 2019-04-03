@@ -1,5 +1,6 @@
 # LIRI-bot
-## HW due 2/25/19
+
+### Overview
 
 This app uses a command line interface to search for music and movie information. There are four possible functions:
 
